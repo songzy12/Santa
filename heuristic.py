@@ -84,7 +84,7 @@ def get_overall_hapiness(wish, gift):
 
     res_child = dict()
     for i in range(0, wish.shape[0]):
-        for j in range(55):
+        for j in range(100): # 55 for small memory usage 
             res_child[(i, wish[i][j])] = int(100* (1 + (wish.shape[1] - j)*2))
 
     res_santa = dict()
@@ -145,13 +145,18 @@ def solve():
     answ[:] = -1
     gift_count = np.zeros(len(gift), dtype=np.int32)
 
+    # wich, gift have already striped the first column
     happiness = get_overall_hapiness(wish, gift)
+    # happiness is like the total happiness for pair (child, gift)
     best_gifts = get_most_desired_gifts(wish, gift)
+    # best_gifts is a sorted dict for gifts
     happiness = recalc_hapiness(happiness, best_gifts, gift)
+    # average the happiness by the popularity of best_gifts
     sorted_hapiness = sort_dict_by_values(happiness)
     print('Happiness sorted...')
 
     for i in range(len(sorted_hapiness)):
+        # sorted_happiness is now a sorted list 
         child = sorted_hapiness[i][0][0]
         g = sorted_hapiness[i][0][1]
         if answ[child] != -1:
@@ -210,7 +215,7 @@ def solve():
     score = avg_normalized_happiness(answ, gift, wish)
     print('Predicted score: {:.8f}'.format(score))
 
-    out = open('subm_{}.csv'.format(score), 'w')
+    out = open('output/subm_{}.csv'.format(score), 'w')
     out.write('ChildId,GiftId\n')
     for i in range(len(answ)):
         out.write(str(i) + ',' + str(answ[i]) + '\n')
