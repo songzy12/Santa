@@ -8,6 +8,8 @@ import operator
 import math
 from ortools.graph import pywrapgraph
 
+import code
+
 INPUT_PATH = './input/'
 
 
@@ -81,7 +83,6 @@ def avg_normalized_happiness(pred, gift, wish):
 
 def get_overall_hapiness(wish, gift):
 
-
     res_child = dict()
     for i in range(0, wish.shape[0]):
         for j in range(100): # 55 for small memory usage 
@@ -128,7 +129,8 @@ def recalc_hapiness(happiness, best_gifts, gift):
 
     for h in happiness:
         c, g = h
-        happiness[h] /= recalc[g]
+        if recalc[g] != 0: # poor gift 
+            happiness[h] /= recalc[g]
 
         # Make triplets/twins more happy
         # if c <= 45000 and happiness[h] < 0.00001:
@@ -144,6 +146,7 @@ def solve():
     answ = np.zeros(len(wish), dtype=np.int32)
     answ[:] = -1
     gift_count = np.zeros(len(gift), dtype=np.int32)
+
     happiness = get_overall_hapiness(wish, gift)
 
     start_nodes = []
@@ -158,7 +161,26 @@ def solve():
         start_nodes.append(int(c))
         end_nodes.append(int(1000000 + g))
         capacities.append(1)
-        unit_costs.append(-happiness[h])
+        
+        # unit_costs.append(-int(happiness[h])) # FIXME: this is not elegant at all
+        if c < 5001: 
+            c1 = c / 3 * 3
+            c2 = c1 + 1
+            c3 = c1 + 2
+            temp = happiness.get((c1, g), -1)
+            temp += happiness.get((c2, g), -1)
+            temp += happiness.get((c3, g), -1)
+            temp //= 3
+            unit_costs.append(-temp)
+        elif c < 45000:
+            c1 = c / 2 * 2
+            c2 = c + 1
+            temp = happiness.get((c1, g), -1)
+            temp += happiness.get((c2, g), -1)
+            temp //= 2
+            unit_costs.append(-temp)
+        else:
+            unit_costs.append(-int(happiness[h]))
 
     for i in range(1000000):
         supplies.append(1)
@@ -171,7 +193,6 @@ def solve():
     # Add each arc.
     for i in range(0, len(start_nodes)):
         min_cost_flow.AddArcWithCapacityAndUnitCost(start_nodes[i], end_nodes[i], capacities[i], unit_costs[i])
-
     # Add node supplies.
     for i in range(0, len(supplies)):
         min_cost_flow.SetNodeSupply(i, supplies[i])
