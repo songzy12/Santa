@@ -159,11 +159,14 @@ def solve():
         end_nodes.append(int(1000000 + g))
         if c < 5001:
             capacities.append(3)
+            unit_costs.append(-happiness[h] // 3)
         elif c < 45001:
             capacities.append(2)
+            unit_costs.append(-happiness[h] // 2)
         else:
             capacities.append(1)
-        unit_costs.append(-happiness[h])
+            unit_costs.append(-happiness[h])
+        # unit_costs.append(-happiness[h])
         if happiness[h] > max_h:
             max_h = happiness[h]
         if happiness[h] < min_h:
