@@ -127,12 +127,10 @@ def get_overall_hapiness(wish, gift):
         res[p] = 0
         if p in res_child:
             a = res_child[p]
-            #res[p] += int((a ** 3) * 4)
-            res[p] += int((a ** 3) * 0.9)
+            res[p] += int((a ** 3) * 10)
         if p in res_santa:
             b = res_santa[p]
-            #res[p] += int((b ** 3) / 4)
-            res[p] += int((b ** 3) / 0.1)
+            res[p] += int((b ** 3) / 10)
 
     return res
 
