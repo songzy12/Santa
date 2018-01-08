@@ -127,10 +127,12 @@ def get_overall_hapiness(wish, gift):
         res[p] = 0
         if p in res_child:
             a = res_child[p]
-            res[p] += int((a ** 3) * 4)
+            #res[p] += int((a ** 3) * 4)
+            res[p] += int((a ** 3) * 0.9)
         if p in res_santa:
             b = res_santa[p]
-            res[p] += int((b ** 3) / 4)
+            #res[p] += int((b ** 3) / 4)
+            res[p] += int((b ** 3) / 0.1)
 
     return res
 
@@ -166,7 +168,7 @@ def solve():
         else:
             capacities.append(1)
             unit_costs.append(-happiness[h])
-        # unit_costs.append(-happiness[h])
+        #unit_costs.append(-happiness[h])
         if happiness[h] > max_h:
             max_h = happiness[h]
         if happiness[h] < min_h:
