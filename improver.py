@@ -407,7 +407,7 @@ int main()
 	unsigned int checker_sum = 0;
 
 #ifdef _OPENMP
-	numthreads = omp_get_num_procs() - 1;
+	numthreads = omp_get_num_procs() - 4;
 #endif
 
 	if (numthreads < 1)
@@ -546,8 +546,8 @@ f.close()
 
 
 if __name__ == '__main__':
-    initial_sub = 'subm_0.931678237749.csv'
+    initial_sub = 'subm_0.935528944758.csv'
     shutil.copy(initial_sub, 'subm.csv')
-    # os.system('g++ -fopenmp -O3 improver.c -o improver')
-    os.system('g++ -O3 improver.c -o improver')
+    os.system('g++ -fopenmp -O3 improver.c -o improver')
+    #os.system('g++ -O3 improver.c -o improver')
     os.system('./improver')
