@@ -546,7 +546,7 @@ f.close()
 
 
 if __name__ == '__main__':
-    initial_sub = 'subm_0.935528944758.csv'
+    initial_sub = 'subm_0.935547812709.csv'
     shutil.copy(initial_sub, 'subm.csv')
     os.system('g++ -fopenmp -O3 improver.c -o improver')
     #os.system('g++ -O3 improver.c -o improver')
