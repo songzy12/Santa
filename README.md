@@ -1,3 +1,26 @@
+## Winner Solution
+
+https://www.kaggle.com/c/santa-gift-matching/discussion/47376
+
+* maximize `1000000 ANCH + ANSH` rather than `ANCH^3 +ANSH^3 `.
+* relaxed problem ignoring twin / triplet constraints as min cost flow problem.
+* most of the twins / triplets in optimal assignment for relaxed problem follow the constraints.
+* if we know how many singles, twins, triplets receive each present, then the original problem can be formulated as min-cost flow problem.
+
+## 2nd Place Solution
+
+https://www.kaggle.com/c/santa-gift-matching/discussion/47386
+
+
+
+## 3rd Place Solution
+
+https://www.kaggle.com/c/santa-gift-matching/discussion/47374
+
+* The key idea is to maximize `a*ANCH + b*ANSH` (a >> b, a=100000, b=1, for example) instead of `ANCH^3 + ANSH^3`.
+* One more problem is twins and triplets.  We maximized `a*ANCH + b*ANSH + c(a>>b>>c)` remove twins and triplets with same Gift, and repeat.
+* Proof for optimal solution: https://k-harada.github.io/santa2017_18.html
+
 ## Improver
 
 **score: 0.935401194595**
