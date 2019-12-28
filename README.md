@@ -83,7 +83,7 @@ Change `4` to be `10`:
 
 <https://developers.google.com/optimization/flow/mincostflow>
 
-###Algorithm
+### Algorithm
 
 * construct a relaxed graph
 * use or tools to solve the min cost flow problem
