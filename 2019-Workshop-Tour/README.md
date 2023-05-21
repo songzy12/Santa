@@ -1,3 +1,2 @@
-# SantaWorkshopTour
-
-<https://www.kaggle.com/c/santa-workshop-tour-2019/overview/evaluation>
+- https://www.kaggle.com/competitions/santa-workshop-tour-2019
+- https://www.kaggle.com/competitions/santa-2019-revenge-of-the-accountants/
